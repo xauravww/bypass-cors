@@ -1,10 +1,16 @@
+import { createRequire } from 'module';
+import { healthCheckJob } from './health.js';
+const require = createRequire(import.meta.url)
+
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 
+const dotenv = require("dotenv");
 const app = express();
+dotenv.config({ path: "./.env" });
 const PORT = process.env.PORT || 3001;
-
+healthCheckJob.start()
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
